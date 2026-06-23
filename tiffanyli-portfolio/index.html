@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tiffany</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#FFF;--bg2:#F6F6F4;--ink:#0E0E0E;--mid:#6B6B6B;--light:#E0E0DC;--syne:'Syne',sans-serif;--dm:'DM Sans',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--dm);font-size:15px;line-height:1.65;overflow-x:hidden;cursor:none;}
+#c{position:fixed;z-index:9999;pointer-events:none;width:7px;height:7px;background:var(--ink);border-radius:50%;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+#cr{position:fixed;z-index:9998;pointer-events:none;width:28px;height:28px;border:1px solid rgba(14,14,14,.2);border-radius:50%;transform:translate(-50%,-50%);transition:left .13s ease,top .13s ease,width .2s,height .2s,border-color .2s;}
+body:has(a:hover) #c,body:has(button:hover) #c{width:12px;height:12px;}
+body:has(a:hover) #cr,body:has(button:hover) #cr{width:40px;height:40px;border-color:var(--ink);}
+#prog{position:fixed;top:0;left:0;height:1px;z-index:200;background:var(--ink);width:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 52px;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--light);}
+.logo{font-family:var(--syne);font-size:15px;font-weight:700;text-decoration:none;color:var(--ink);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;color:var(--mid);transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
+.rv.on{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}
+
+/* INTRO */
+#intro{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:57px;border-bottom:1px solid var(--light);}
+.intro-l{padding:72px 52px;display:flex;flex-direction:column;justify-content:center;gap:32px;border-right:1px solid var(--light);}
+.intro-eyebrow{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);}
+.intro-h{font-family:var(--syne);font-size:clamp(48px,6vw,82px);font-weight:800;line-height:.93;letter-spacing:-.025em;}
+.intro-h .dim{color:var(--light);}
+.intro-body{display:flex;flex-direction:column;gap:13px;max-width:420px;}
+.intro-body p{font-size:15px;font-weight:300;color:var(--mid);line-height:1.8;}
+.intro-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.btn{font-family:var(--syne);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:inline-block;padding:11px 22px;cursor:pointer;border:none;transition:all .2s;}
+.btn-solid{background:var(--ink);color:#fff;}
+.btn-solid:hover{background:#2a2a2a;transform:translateY(-1px);}
+.btn-out{background:transparent;color:var(--ink);border:1px solid var(--light);}
+.btn-out:hover{border-color:var(--ink);transform:translateY(-1px);}
+.intro-r{position:relative;overflow:hidden;background:var(--bg2);display:flex;align-items:flex-end;padding:32px;}
+.intro-r img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.intro-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+.intro-ph .sym{font-family:var(--syne);font-size:80px;color:var(--light);}
+.intro-ph .hint{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--light);}
+.intro-badge{position:relative;z-index:2;font-family:var(--syne);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);border:1px solid var(--light);padding:8px 14px;background:rgba(255,255,255,.8);backdrop-filter:blur(6px);}
+
+/* EXPERIENCE */
+#experience{border-bottom:1px solid var(--light);padding:68px 52px;}
+.sec-label{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;}
+.sec-h{font-family:var(--syne);font-size:clamp(26px,2.8vw,38px);font-weight:800;line-height:1.05;letter-spacing:-.015em;}
+.sec-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;}
+.tl{display:flex;flex-direction:column;}
+.tl-item{display:grid;grid-template-columns:130px 1fr;gap:32px;padding:26px 0;border-top:1px solid var(--light);}
+.tl-item:last-child{border-bottom:1px solid var(--light);}
+.tl-date{font-size:11px;color:var(--mid);padding-top:2px;}
+.tl-role{font-family:var(--syne);font-size:17px;font-weight:700;margin-bottom:2px;}
+.tl-org{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--mid);margin-bottom:11px;}
+.tl-blist{display:flex;flex-direction:column;gap:4px;}
+.tl-blist li{list-style:none;font-size:13px;font-weight:300;color:var(--mid);padding-left:14px;position:relative;line-height:1.6;}
+.tl-blist li::before{content:'–';position:absolute;left:0;}
+.tl-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px;}
+.chip{font-size:9px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--mid);padding:3px 8px;border:1px solid var(--light);}
+
+/* PROJECTS — simple list, no filter */
+#projects{border-bottom:1px solid var(--light);padding:68px 52px;}
+.proj-list{display:flex;flex-direction:column;margin-top:40px;}
+.proj-row{
+  display:grid;
+  grid-template-columns:40px 1fr auto;
+  align-items:center;
+  gap:28px;
+  padding:24px 0;
+  border-top:1px solid var(--light);
+  text-decoration:none;
+  color:var(--ink);
+  transition:background .15s;
+  cursor:pointer;
+}
+.proj-row:last-child{border-bottom:1px solid var(--light);}
+.proj-row:hover{background:var(--bg2);margin:0 -52px;padding-left:52px;padding-right:52px;}
+.proj-num{font-family:var(--syne);font-size:12px;font-weight:600;color:var(--light);font-variant-numeric:tabular-nums;}
+.proj-info{}
+.proj-cat{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:4px;}
+.proj-name{font-family:var(--syne);font-size:20px;font-weight:700;line-height:1.15;}
+.proj-snip{font-size:13px;font-weight:300;color:var(--mid);margin-top:4px;}
+.proj-arr{font-size:18px;color:var(--light);transition:transform .2s,color .2s;flex-shrink:0;}
+.proj-row:hover .proj-arr{transform:translateX(4px);color:var(--ink);}
+
+/* SKILLS */
+#skills{border-bottom:1px solid var(--light);padding:52px;}
+.skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:28px;}
+.sg h4{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+.sg ul{list-style:none;display:flex;flex-direction:column;}
+.sg ul li{font-size:13px;font-weight:300;color:var(--ink);padding:7px 0;border-bottom:1px solid var(--bg2);display:flex;align-items:center;gap:8px;}
+.sg ul li::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--light);flex-shrink:0;}
+
+/* CONTACT */
+#contact{padding:68px 52px;}
+.contact-inner{max-width:520px;}
+.contact-h{font-family:var(--syne);font-size:clamp(34px,4vw,52px);font-weight:800;line-height:.95;letter-spacing:-.025em;margin-bottom:16px;}
+.contact-sub{font-size:15px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:28px;}
+.clinks{display:flex;flex-wrap:wrap;gap:9px;}
+.cl{font-family:var(--syne);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--mid);border:1px solid var(--light);padding:10px 20px;transition:all .2s;display:inline-block;cursor:pointer;background:transparent;}
+.cl:hover{color:var(--ink);border-color:var(--ink);}
+.cl.pri{background:var(--ink);color:#fff;border-color:var(--ink);}
+.cl.pri:hover{background:#2a2a2a;}
+.mbg{display:none;position:fixed;inset:0;z-index:500;background:rgba(255,255,255,.75);backdrop-filter:blur(18px);align-items:center;justify-content:center;}
+.mbg.open{display:flex;}
+.modal{background:var(--bg);border:1px solid var(--light);padding:38px;width:min(460px,90vw);display:flex;flex-direction:column;gap:18px;position:relative;animation:fd .2s ease;}
+@keyframes fd{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+.modal h3{font-family:var(--syne);font-size:19px;font-weight:700;}
+.mcl{position:absolute;top:0;right:0;padding:15px 18px;background:none;border:none;cursor:pointer;font-family:var(--syne);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);}
+.mcl:hover{color:var(--ink);}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg label{font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--mid);}
+.fg input,.fg textarea{background:var(--bg2);border:1px solid var(--light);color:var(--ink);font-family:var(--dm);font-size:14px;padding:10px 12px;outline:none;resize:vertical;transition:border-color .2s;}
+.fg input:focus,.fg textarea:focus{border-color:var(--ink);}
+.fg textarea{min-height:96px;}
+footer{padding:20px 52px;display:flex;justify-content:space-between;border-top:1px solid var(--light);}
+footer span{font-size:12px;color:var(--mid);}
+@media(max-width:860px){
+  nav{padding:14px 22px;}
+  #intro{grid-template-columns:1fr;}
+  .intro-r{min-height:220px;}
+  .intro-l{padding:60px 22px;}
+  #experience,#projects,#contact,#skills{padding:52px 22px;}
+  .tl-item{grid-template-columns:1fr;gap:5px;}
+  .proj-row:hover{margin:0;padding-left:0;padding-right:0;}
+  .skill-groups{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:4px;padding:16px 22px;}
+  body{cursor:auto;}#c,#cr{display:none;}
+}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none;}#c,#cr{display:none;}body{cursor:auto;}}
+</style>
+</head>
+<body>
+<div id="c"></div><div id="cr"></div><div id="prog"></div>
+<nav>
+  <a href="index.html" class="logo">Tiffany</a>
+  <ul class="nav-links">
+    <li><a href="#intro">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="intro">
+  <div class="intro-l">
+    <p class="intro-eyebrow rv">Electrical and Computer Engineering · Cornell University</p>
+    <h1 class="intro-h rv d1">Hi, I'm<br>Tiffany.<br><span class="dim">I make chips.</span></h1>
+    <div class="intro-body">
+      <p class="rv d2">I'm a junior at Cornell studying Electrical and Computer Engineering. I spend most of my time in the lab — doing IC layout in Cadence Virtuoso, validating cryo-CMOS chips for quantum hardware, and designing PCBs for biosensor platforms. I'm also a TA for Embedded Systems and part of Kappa Phi Lambda.</p>
+      <p class="rv d3">Outside of engineering I like running, cooking, and making pottery. I'm looking for internships in chip design for Summer 2027.</p>
+    </div>
+    <div class="intro-btns rv d3">
+      <a href="#projects" class="btn btn-solid">See my work</a>
+      <a href="#" class="btn btn-out">Resume ↗</a>
+    </div>
+  </div>
+  <div class="intro-r">
+    <!-- swap: <img src="images/headshot.jpg" alt="Tiffany"> -->
+    <div class="intro-ph"><div class="sym">⬡</div><div class="hint">images/headshot.jpg</div></div>
+    <div class="intro-badge rv">Electrical and Computer Engineering · 2028</div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="sec-row rv"><div><p class="sec-label">Work & Research</p><h2 class="sec-h">Experience</h2></div></div>
+  <div class="tl">
+    <div class="tl-item rv">
+      <div class="tl-date">2024 — Present</div>
+      <div><div class="tl-role">Electrical Engineer</div><div class="tl-org">Cornell Custom Silicon Systems (C2S2)</div>
+      <ul class="tl-blist"><li>Analog/mixed-signal IC layout in TSMC 180nm CMOS using Cadence Virtuoso</li><li>Tape-out contributor on multi-project wafer runs</li></ul>
+      
+    </div>
+    <div class="tl-item rv d1">
+      <div class="tl-date">2024 — Present</div>
+      <div><div class="tl-role">Research Assistant</div><div class="tl-org">IQC Lab · Cornell</div>
+      <ul class="tl-blist"><li>Cryo-CMOS chip validation for qubit control systems</li><li>AWG520 pulse generation and MATLAB waveform scripting</li></ul>
+      
+    </div>
+    <div class="tl-item rv d2">
+      <div class="tl-date">2024 — Present</div>
+      <div><div class="tl-role">Electrical Subteam Lead</div><div class="tl-org">SensTech · SensUs 2025</div>
+      <ul class="tl-blist"><li>Analog front-end and power system design for a portable biosensor</li><li>Competing in SensUs 2025 international competition</li></ul>
+      
+    </div>
+    <div class="tl-item rv d3">
+      <div class="tl-date">Spring 2026</div>
+      <div><div class="tl-role">Teaching Assistant</div><div class="tl-org">Embedded Systems · Cornell</div>
+      <ul class="tl-blist"><li>Office hours and lab support for 100+ students in embedded C and microcontroller programming</li></ul>
+      
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="rv"><p class="sec-label">Selected work</p><h2 class="sec-h">Projects</h2></div>
+  <div class="proj-list">
+    <a class="proj-row rv" href="projects/c2s2.html">
+      <span class="proj-num">01</span>
+      <div class="proj-info">
+        <div class="proj-cat">Analog IC · C2S2</div>
+        <div class="proj-name">Analog Mixed-Signal IC Layout</div>
+        <div class="proj-snip">TSMC 180nm CMOS layout in Cadence Virtuoso — tape-out contributor</div>
+      </div>
+      <span class="proj-arr">→</span>
+    </a>
+    <a class="proj-row rv d1" href="projects/iqc.html">
+      <span class="proj-num">02</span>
+      <div class="proj-info">
+        <div class="proj-cat">Quantum Hardware · IQC Lab</div>
+        <div class="proj-name">Qubit Control Chip Validation</div>
+        <div class="proj-snip">Cryo-CMOS chip testing, AWG520 pulse generation, MATLAB waveform scripting</div>
+      </div>
+      <span class="proj-arr">→</span>
+    </a>
+    <a class="proj-row rv d2" href="projects/senstech.html">
+      <span class="proj-num">03</span>
+      <div class="proj-info">
+        <div class="proj-cat">Biosensor · SensTech</div>
+        <div class="proj-name">Portable Biosensor Electronics</div>
+        <div class="proj-snip">Analog front-end and PCB design for SensUs 2025 international competition</div>
+      </div>
+      <span class="proj-arr">→</span>
+    </a>
+    <a class="proj-row rv d3" href="projects/fpga.html">
+      <span class="proj-num">04</span>
+      <div class="proj-info">
+        <div class="proj-cat">Digital · ECE 2300</div>
+        <div class="proj-name">FPGA LiDAR Door Monitor</div>
+        <div class="proj-snip">50+ Verilog modules, LiDAR sensor interface, FSM-based control</div>
+      </div>
+      <span class="proj-arr">→</span>
+    </a>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="rv"><p class="sec-label">Skills</p></div>
+  <div class="skill-groups rv d1">
+    <div class="sg"><h4>EDA & Hardware</h4><ul><li>Cadence Virtuoso</li><li>LTSpice</li><li>KiCad</li><li>Oscilloscope / DMM</li><li>AWG520</li></ul></div>
+    <div class="sg"><h4>Programming</h4><ul><li>MATLAB</li><li>Python</li><li>C / Embedded C</li><li>Verilog</li><li>SystemVerilog</li></ul></div>
+    <div class="sg"><h4>Other</h4><ul><li>PCB Layout</li><li>Cryo-CMOS Testing</li><li>Soldering</li><li>Git / Linux</li><li>Vivado</li></ul></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <p class="sec-label rv">Contact</p>
+    <h2 class="contact-h rv d1">Get in touch.</h2>
+    <p class="contact-sub rv d2">I'm always happy to chat — whether it's about internships, research, or just something cool you're working on.</p>
+    <div class="clinks rv d3">
+      <button class="cl pri" onclick="openM()">Send a message</button>
+      <a href="mailto:you@cornell.edu" class="cl">Email</a>
+      <a href="#" class="cl">LinkedIn</a>
+      <a href="#" class="cl">GitHub</a>
+      <a href="#" class="cl">Resume</a>
+    </div>
+  </div>
+</section>
+
+<footer><span>Tiffany — Electrical and Computer Engineering, Cornell University</span><span>Class of 2028</span></footer>
+
+<div class="mbg" id="mbg" onclick="if(event.target===this)closeM()">
+  <div class="modal">
+    <button class="mcl" onclick="closeM()">Close ✕</button>
+    <h3>Say hi</h3>
+    <div class="fg"><label>Name</label><input type="text" placeholder="Your name"></div>
+    <div class="fg"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+    <div class="fg"><label>Message</label><textarea placeholder="Hi Tiffany!"></textarea></div>
+    <button class="btn btn-solid" style="align-self:flex-start;" onclick="closeM()">Send</button>
+  </div>
+</div>
+
+<script>
+const C=document.getElementById('c'),R=document.getElementById('cr');
+let cx=0,cy=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;C.style.left=cx+'px';C.style.top=cy+'px';});
+(function loop(){rx+=(cx-rx)*.13;ry+=(cy-ry)*.13;R.style.left=rx+'px';R.style.top=ry+'px';requestAnimationFrame(loop);})();
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('prog').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';});
+const ro=new IntersectionObserver(ee=>{ee.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+function openM(){document.getElementById('mbg').classList.add('open');}
+function closeM(){document.getElementById('mbg').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
+</script>
+</body>
+</html>

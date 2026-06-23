@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Analog IC Layout — Tiffany</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#FFF;--bg2:#F6F6F4;--ink:#0E0E0E;--mid:#6B6B6B;--light:#E0E0DC;--syne:'Syne',sans-serif;--dm:'DM Sans',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--dm);font-size:15px;line-height:1.65;cursor:none;}
+#c{position:fixed;z-index:9999;pointer-events:none;width:7px;height:7px;background:var(--ink);border-radius:50%;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+#cr{position:fixed;z-index:9998;pointer-events:none;width:28px;height:28px;border:1px solid rgba(14,14,14,.2);border-radius:50%;transform:translate(-50%,-50%);transition:left .13s ease,top .13s ease,width .2s,height .2s;}
+body:has(a:hover) #c,body:has(button:hover) #c{width:12px;height:12px;}
+body:has(a:hover) #cr,body:has(button:hover) #cr{width:40px;height:40px;border-color:var(--ink);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 52px;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--light);}
+.logo{font-family:var(--syne);font-size:15px;font-weight:700;text-decoration:none;color:var(--ink);}
+.nav-back{font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;color:var(--mid);transition:color .2s;display:flex;align-items:center;gap:8px;}
+.nav-back:hover{color:var(--ink);}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
+.rv.on{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}
+
+/* PROJECT PAGE LAYOUT */
+.proj-hero{
+  padding-top:57px;
+  min-height:52vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--light);
+}
+.proj-hero-l{
+  padding:60px 52px;
+  display:flex;flex-direction:column;justify-content:flex-end;gap:16px;
+  border-right:1px solid var(--light);
+}
+.proj-eyebrow{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);}
+.proj-title{font-family:var(--syne);font-size:clamp(32px,4vw,52px);font-weight:800;line-height:1.0;letter-spacing:-.02em;}
+.proj-tagline{font-size:15px;font-weight:300;color:var(--mid);max-width:380px;line-height:1.75;}
+.proj-hero-r{
+  background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.proj-hero-r img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;}
+.proj-hero-r video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;}
+.proj-hero-ph{font-family:var(--syne);font-size:80px;color:var(--light);position:relative;z-index:1;text-align:center;}
+.proj-hero-hint{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--light);margin-top:8px;text-align:center;}
+
+/* youtube embed */
+.yt-wrap{position:relative;width:100%;height:100%;min-height:300px;}
+.yt-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+
+/* BODY */
+.proj-body{max-width:760px;margin:0 auto;padding:72px 52px;}
+.proj-section{margin-bottom:56px;}
+.proj-section-label{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;}
+.proj-section h2{font-family:var(--syne);font-size:22px;font-weight:700;margin-bottom:14px;}
+.proj-section p{font-size:15px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:12px;}
+.proj-section p:last-child{margin-bottom:0;}
+
+/* meta grid */
+.proj-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--light);margin-bottom:56px;border:1px solid var(--light);}
+.meta-cell{background:var(--bg);padding:20px 24px;}
+.meta-cell .mk{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:6px;}
+.meta-cell .mv{font-size:14px;font-weight:400;line-height:1.5;}
+
+/* tools list */
+.tools-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.tool{font-size:12px;font-weight:400;color:var(--ink);padding:6px 14px;border:1px solid var(--light);}
+
+/* nav between projects */
+.proj-nav{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--light);
+}
+.proj-nav-item{
+  padding:28px 52px;text-decoration:none;color:var(--ink);
+  display:flex;flex-direction:column;gap:4px;
+  transition:background .15s;
+}
+.proj-nav-item:hover{background:var(--bg2);}
+.proj-nav-item+.proj-nav-item{border-left:1px solid var(--light);}
+.pni-label{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);}
+.pni-name{font-family:var(--syne);font-size:17px;font-weight:700;}
+
+footer{padding:20px 52px;display:flex;justify-content:space-between;border-top:1px solid var(--light);}
+footer span{font-size:12px;color:var(--mid);}
+
+@media(max-width:860px){
+  nav{padding:14px 22px;}
+  .proj-hero{grid-template-columns:1fr;}
+  .proj-hero-r{min-height:240px;}
+  .proj-hero-l{padding:48px 22px 32px;}
+  .proj-body{padding:48px 22px;}
+  .proj-meta{grid-template-columns:1fr 1fr;}
+  .proj-nav{grid-template-columns:1fr;}
+  .proj-nav-item+.proj-nav-item{border-left:none;border-top:1px solid var(--light);}
+  .proj-nav-item{padding:22px 22px;}
+  footer{flex-direction:column;gap:4px;padding:16px 22px;}
+  body{cursor:auto;}#c,#cr{display:none;}
+}
+</style>
+</head>
+<body>
+<div id="c"></div><div id="cr"></div>
+<nav>
+  <a href="../index.html" class="logo">Tiffany</a>
+  <a href="../index.html#projects" class="nav-back">← All projects</a>
+</nav>
+
+<div class="proj-hero">
+  <div class="proj-hero-l">
+    <p class="proj-eyebrow rv">Analog IC · Cornell Custom Silicon Systems</p>
+    <h1 class="proj-title rv d1">Analog Mixed-Signal<br>IC Layout</h1>
+    <p class="proj-tagline rv d2">Designing sub-micron analog cells in TSMC 180nm CMOS for multi-project wafer tape-outs at C2S2.</p>
+  </div>
+  <div class="proj-hero-r">
+    <!--
+      Option A — photo:   <img src="../images/c2s2-cover.jpg" alt="IC Layout">
+      Option B — video:   <video autoplay muted loop playsinline src="../videos/c2s2-demo.mp4"></video>
+      Option C — YouTube: 
+      <div class="yt-wrap">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+      </div>
+    -->
+    <div>
+      <div class="proj-hero-ph rv">∿</div>
+      <div class="proj-hero-hint">Add photo or video here</div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-body">
+
+  <div class="proj-meta rv">
+    <div class="meta-cell"><div class="mk">Role</div><div class="mv">Electrical Engineer</div></div>
+    <div class="meta-cell"><div class="mk">Organization</div><div class="mv">Cornell Custom Silicon Systems</div></div>
+    <div class="meta-cell"><div class="mk">Timeline</div><div class="mv">2024 — Present</div></div>
+  </div>
+
+  <div class="proj-section rv">
+    <p class="proj-section-label">Overview</p>
+    <p>Cornell Custom Silicon Systems (C2S2) is a student-run chip design team that tapes out real silicon on TSMC's 180nm CMOS process through multi-project wafer runs. As an electrical engineer on the analog/mixed-signal subteam, I'm responsible for designing and laying out analog circuit cells that get included in real fabricated chips.</p>
+    <p>This kind of work is pretty rare at the undergraduate level — most students don't get to work on actual tapeouts, so it's been a big part of why I got into chip design seriously.</p>
+  </div>
+
+  <div class="proj-section rv d1">
+    <p class="proj-section-label">Goal</p>
+    <p>The goal of the project is to design a functional analog subsystem — specifically a mixed-signal interface block — that meets strict area, power, and performance constraints for a shared silicon die. Every layout decision has direct consequences on silicon: routing parasitics, device matching, and latch-up rules all matter in ways simulation alone can't fully capture.</p>
+    <p>The comparator block I worked on needed to hit a target power envelope while maintaining the required switching speed — a classic analog tradeoff that required iterating between schematic and layout multiple times.</p>
+  </div>
+
+  <div class="proj-section rv d2">
+    <p class="proj-section-label">What I did</p>
+    <p>I did the full layout of several analog cells in Cadence Virtuoso — placing and routing transistors, running DRC and LVS clean, and coordinating with the digital team on interface timing. I ran SPICE simulations to verify performance before submitting to the tapeout flow.</p>
+    <p>Working inside a real tapeout schedule was a different kind of pressure than coursework — hard deadlines, shared design rules, and zero room for mistakes once the GDS goes to the fab.</p>
+  </div>
+
+  <div class="proj-section rv d3">
+    <p class="proj-section-label">Tools</p>
+    <div class="tools-list">
+      <span class="tool">Cadence Virtuoso</span>
+      <span class="tool">TSMC 180nm CMOS</span>
+      <span class="tool">SPICE</span>
+      <span class="tool">DRC / LVS</span>
+      <span class="tool">Analog Layout</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="proj-nav">
+  <a href="../index.html#projects" class="proj-nav-item">
+    <span class="pni-label">← Back</span>
+    <span class="pni-name">All Projects</span>
+  </a>
+  <a href="iqc.html" class="proj-nav-item" style="text-align:right;">
+    <span class="pni-label">Next →</span>
+    <span class="pni-name">Qubit Control Chip Validation</span>
+  </a>
+</div>
+<footer><span>Tiffany — Electrical and Computer Engineering, Cornell University</span><span>Class of 2028</span></footer>
+<script>
+const C=document.getElementById('c'),R=document.getElementById('cr');
+let cx=0,cy=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;C.style.left=cx+'px';C.style.top=cy+'px';});
+(function loop(){rx+=(cx-rx)*.13;ry+=(cy-ry)*.13;R.style.left=rx+'px';R.style.top=ry+'px';requestAnimationFrame(loop);})();
+const ro=new IntersectionObserver(ee=>{ee.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
