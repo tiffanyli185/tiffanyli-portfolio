@@ -14,6 +14,7 @@
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
+      <a href="#research">Research</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -41,36 +42,97 @@
   <section id="projects" class="projects">
     <h2>Projects</h2>
 
+    <h3 class="project-category">Analog Projects</h3>
     <div class="project-grid">
 
+      <a class="project-card" href="projects/flash-adc.html">
+        <h4>Mixed-Signal Asynchronous Flash ADC</h4>
+        <p class="project-meta">Cornell Custom Silicon Systems (C2S2) · Oct. 2025 – Present</p>
+        <p>
+          Designed schematics and layouts for mixed-signal analog blocks in TSMC
+          180nm CMOS using Cadence Virtuoso, including comparators and ADC circuits
+          for the BIRD chip.
+        </p>
+        <span class="view-link">View project →</span>
+      </a>
+
       <a class="project-card" href="projects/encoder.html">
-        <h3>Adiabatic 3-Bit Priority Encoder</h3>
-        <p class="project-meta">Cornell Custom Silicon Systems · Jan. 2026 – Present</p>
+        <h4>Adiabatic Logic Gates</h4>
+        <p class="project-meta">Cornell Custom Silicon Systems (C2S2) · Jan. 2026 – Present</p>
         <p>
           Redesigned an adiabatic Flash comparator and 3-bit priority encoder using
-          SCRL-based adiabatic circuits, reducing power by an estimated 7.2x versus a
-          double-tailed comparator and 19x–33x versus standard CMOS.
+          SCRL-based adiabatic logic gates, reducing power by an estimated 7.2x
+          versus a double-tailed comparator and 19x–33x versus standard CMOS.
+        </p>
+        <span class="view-link">View project →</span>
+      </a>
+
+    </div>
+
+    <h3 class="project-category">PCB Projects</h3>
+    <div class="project-grid">
+
+      <a class="project-card" href="projects/pump-pcb.html">
+        <h4>Pump Control PCB</h4>
+        <p class="project-meta">Integrated Quantum-Classical Micro-Systems Lab (IQC) · Oct. 2025 – Present</p>
+        <p>
+          Designed and laid out a KiCad PCB for an ATmega-based dual H-bridge
+          piezoelectric pump driver, using SPICE simulation to select capacitor
+          values and optimize layout for noise reduction.
         </p>
         <span class="view-link">View project →</span>
       </a>
 
       <a class="project-card" href="projects/pcb.html">
-        <h3>Parkinson's Levodopa Sensor &amp; Motor Layered PCB</h3>
-        <p class="project-meta">SensTech · Oct. 2025 – Present</p>
+        <h4>Potentiostat PCB Design</h4>
+        <p class="project-meta">SensTech · Oct. 2024 – Present</p>
         <p>
-          Designed a KiCad PCB integrating a potentiostat, screen-printed electrode
-          interface, and microcontroller-driven pump, cutting power and footprint by
-          an estimated 35% versus an Arduino-based module.
+          Designed low-noise potentiostat circuitry for a 3-electrode amperometric
+          biosensor and integrated it into a KiCad PCB for a portable creatinine
+          biosensor, placing 3rd in accuracy at SensUs 2025.
+        </p>
+        <span class="view-link">View project →</span>
+      </a>
+
+    </div>
+
+    <h3 class="project-category">Digital/Embedded Projects</h3>
+    <div class="project-grid">
+
+      <a class="project-card" href="projects/temp-fan.html">
+        <h4>Temperature-Controlled Fan</h4>
+        <p class="project-meta">Embedded Systems Project</p>
+        <p class="detail-placeholder">
+          Add a short description here.
         </p>
         <span class="view-link">View project →</span>
       </a>
 
       <a class="project-card" href="projects/fpga.html">
-        <h3>FPGA Door Detector</h3>
+        <h4>FPGA Door Detector</h4>
         <p class="project-meta">Digital Logic &amp; Computer Organization, Cornell University</p>
         <p>
           Designed an FPGA-based door detection system using modular logic blocks,
           verified in simulation before hardware programming.
+        </p>
+        <span class="view-link">View project →</span>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="research" class="projects">
+    <h2>Research</h2>
+
+    <div class="project-grid">
+
+      <a class="project-card" href="research/quasi.html">
+        <h4>Cryo-CMOS QuASI Validation</h4>
+        <p class="project-meta">Integrated Quantum-Classical Micro-Systems Lab (IQC) · Oct. 2025 – Present</p>
+        <p>
+          Validating a custom cryo-CMOS chip by comparing QuASI simulations against
+          Cadence circuit simulations, narrowing gate error to within 0.0014% after
+          calibration.
         </p>
         <span class="view-link">View project →</span>
       </a>
