@@ -34,21 +34,55 @@
     </div>
 
     <h2>Overview</h2>
-    <ul>
-      <li>
-        Redesigned an adiabatic Flash comparator and 3-bit priority encoder using
-        SCRL-based adiabatic logic gates, reducing power by an estimated 7.2x versus a
-        double-tailed comparator and 19x–33x versus standard CMOS.
-      </li>
-      <li>
-        Ran post-extraction simulations to analyze parasitic capacitance and refine
-        transistor-level sizing for power optimization.
-      </li>
-    </ul>
+    <p>
+      A C2S2 side project redesigning a Flash comparator and 3-bit priority
+      encoder using adiabatic logic instead of standard CMOS, aimed at cutting
+      power consumption well below what a conventional design can achieve.
+    </p>
 
-    <h2>More details</h2>
-    <!-- Write more about this project here — design decisions, challenges, results, what you'd do differently, etc. -->
-    <p class="detail-placeholder">More details coming soon.</p>
+    <h2>More Details</h2>
+    <p>
+      This project redesigned a Flash comparator and 3-bit priority encoder using
+      adiabatic logic instead of standard CMOS. Adiabatic logic saves power by
+      avoiding the abrupt voltage swings that cause standard CMOS to dissipate
+      energy as heat every time a node charges or discharges. Instead, it uses a
+      slow, ramping "trapezoidal" clock signal to charge and discharge nodes
+      gradually, recovering most of that energy back into the power supply rather
+      than losing it. The specific style I used is called SCRL (Split-level Charge
+      Recovery Logic), which relies on multiple overlapping clock phases to
+      control when each stage evaluates and holds its state, so energy gets
+      recovered in steps rather than all at once. I designed and simulated
+      everything in Cadence Virtuoso, from schematic capture through layout and
+      post-extraction verification.
+    </p>
+    <p>
+      The layout stage was the hardest part. Because SCRL circuits are wired
+      differently from standard CMOS, getting the top-level wiring to route
+      cleanly took a lot of iteration, and I had to balance the width of the metal
+      tracks against how large the transistors themselves were. After finishing
+      the first layout pass, I found that shrinking the transistors actually
+      reduced power further, so I resized them and had to redo the entire layout,
+      then re-run testing to confirm the new version still worked correctly. On
+      the design side, a big decision was how to generate the 16 clock phases the
+      circuit needed. I built dedicated testbenches to verify the clock
+      generation and worked out the correct spacing between phases and exactly
+      when each trapezoidal ramp should begin, since getting that timing wrong
+      would break the energy recovery the whole design depends on.
+    </p>
+    <p>
+      After the redesign, the power savings were bigger than I expected: about
+      7.2x lower than a double-tailed comparator, and 19–33x lower than a standard
+      CMOS implementation, confirmed through post-extraction simulation that
+      accounted for parasitic capacitance.
+    </p>
+    <p>
+      Having to redo the layout after resizing the transistors was a good lesson
+      in how connected each step of this process really is. A change early on
+      ripples into everything downstream. It pushed me to test more thoroughly at
+      each stage instead of waiting until the end, and to get better at
+      backtracing an issue to the step that actually caused it, rather than
+      assuming it was whatever I'd touched most recently.
+    </p>
 
     <a class="back-link" href="../index.html#projects">← Back to projects</a>
   </section>
