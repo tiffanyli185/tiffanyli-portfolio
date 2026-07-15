@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adiabatic Logic Gates — Tiffany Li</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Tiffany Li</a>
+    <nav>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-detail">
+    <a class="back-link" href="../index.html#projects">← Back to projects</a>
+
+    <h1>Adiabatic Logic Gates</h1>
+    <p class="project-meta">Cornell Custom Silicon Systems (C2S2) · Jan. 2026 – Present</p>
+
+    <!-- Swap these placeholders for real project photos, e.g. <img src="encoder-1.jpg" alt="..."> -->
+    <div class="gallery">
+      <div class="photo-placeholder">Add a photo here<br>(e.g. layout screenshot)</div>
+      <div class="photo-placeholder">Add a photo here<br>(e.g. simulation results)</div>
+    </div>
+
+    <h2>Overview</h2>
+    <ul>
+      <li>
+        Redesigned an adiabatic Flash comparator and 3-bit priority encoder using
+        SCRL-based adiabatic logic gates, reducing power by an estimated 7.2x versus a
+        double-tailed comparator and 19x–33x versus standard CMOS.
+      </li>
+      <li>
+        Ran post-extraction simulations to analyze parasitic capacitance and refine
+        transistor-level sizing for power optimization.
+      </li>
+    </ul>
+
+    <h2>More details</h2>
+    <!-- Write more about this project here — design decisions, challenges, results, what you'd do differently, etc. -->
+    <p class="detail-placeholder">More details coming soon.</p>
+
+    <a class="back-link" href="../index.html#projects">← Back to projects</a>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 Tiffany Li</p>
+</footer>
+
+</body>
+</html>
