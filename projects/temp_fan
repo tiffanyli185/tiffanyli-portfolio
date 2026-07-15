@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature-Controlled Fan — Tiffany Li</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Tiffany Li</a>
+    <nav>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-detail">
+    <a class="back-link" href="../index.html#projects">← Back to projects</a>
+
+    <!-- Update the meta line below with the actual course/lab and dates -->
+    <h1>Temperature-Controlled Fan</h1>
+    <p class="project-meta">Embedded Systems Project</p>
+
+    <!-- Swap these placeholders for real project photos, e.g. <img src="temp-fan-1.jpg" alt="..."> -->
+    <div class="gallery">
+      <div class="photo-placeholder">Add a photo here<br>(e.g. circuit setup)</div>
+      <div class="photo-placeholder">Add a photo here<br>(e.g. finished build)</div>
+    </div>
+
+    <h2>Overview</h2>
+    <!-- Add project bullets here — what it does, what you built, key results -->
+    <p class="detail-placeholder">Add a project overview here.</p>
+
+    <h2>More details</h2>
+    <!-- Write more about this project here — design decisions, challenges, results, what you'd do differently, etc. -->
+    <p class="detail-placeholder">More details coming soon.</p>
+
+    <a class="back-link" href="../index.html#projects">← Back to projects</a>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 Tiffany Li</p>
+</footer>
+
+</body>
+</html>
