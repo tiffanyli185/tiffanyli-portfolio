@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mixed-Signal Asynchronous Flash ADC — Tiffany Li</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Tiffany Li</a>
+    <nav>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="project-detail">
+    <a class="back-link" href="../index.html#projects">← Back to projects</a>
+
+    <h1>Mixed-Signal Asynchronous Flash ADC</h1>
+    <p class="project-meta">Cornell Custom Silicon Systems (C2S2) · Oct. 2025 – Present</p>
+
+    <!-- Swap these placeholders for real project photos, e.g. <img src="flash-adc-1.jpg" alt="..."> -->
+    <div class="gallery">
+      <div class="photo-placeholder">Add a photo here<br>(e.g. layout screenshot)</div>
+      <div class="photo-placeholder">Add a photo here<br>(e.g. simulation results)</div>
+    </div>
+
+    <h2>Overview</h2>
+    <ul>
+      <li>
+        Designed schematics and layouts for mixed-signal analog blocks in TSMC
+        180nm CMOS using Cadence Virtuoso, including comparators and an
+        asynchronous flash ADC for the BIRD chip.
+      </li>
+      <li>
+        Built and verified analog switch layouts; contributed to top-level chip
+        integration and pad ring formatting.
+      </li>
+      <li>
+        Validated circuit performance via Monte Carlo and PEX simulations to catch
+        yield and process-variation issues before tape-out.
+      </li>
+    </ul>
+
+    <h2>More details</h2>
+    <!-- Write more about this project here — design decisions, challenges, results, what you'd do differently, etc. -->
+    <p class="detail-placeholder">More details coming soon.</p>
+
+    <a class="back-link" href="../index.html#projects">← Back to projects</a>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 Tiffany Li</p>
+</footer>
+
+</body>
+</html>
