@@ -4,7 +4,8 @@
   --muted: #6b6b6b;
   --accent: #4f46e5;
   --border: #e5e5e5;
-  --max-width: 720px;
+  --max-width: 960px;
+  --radius: 12px;
 }
 
 * {
@@ -21,6 +22,7 @@ body {
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -31,6 +33,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* ---------- Header / nav ---------- */
 
 header {
   position: sticky;
@@ -61,6 +65,8 @@ nav a {
   font-size: 0.95rem;
 }
 
+/* ---------- Layout shell ---------- */
+
 main {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -72,19 +78,27 @@ section {
   border-bottom: 1px solid var(--border);
 }
 
+section:last-of-type {
+  border-bottom: none;
+}
+
+/* ---------- Hero ---------- */
+
 .hero h1 {
-  font-size: 2.5rem;
-  margin: 0 0 0.25rem;
+  font-size: 2.75rem;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.02em;
 }
 
 .tagline {
   color: var(--muted);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin: 0 0 1.5rem;
 }
 
 .bio {
   font-size: 1.05rem;
+  max-width: 60ch;
 }
 
 .bio-placeholder {
@@ -98,24 +112,30 @@ h2 {
   margin: 0 0 1.5rem;
 }
 
+/* ---------- Project grid (cards on the index page) ---------- */
+
 .project-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
 .project-card {
-  display: block;
-  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: #ffffff;
   color: var(--text);
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .project-card:hover {
   border-color: var(--accent);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   text-decoration: none;
 }
 
@@ -132,6 +152,7 @@ h2 {
 
 .project-card p:last-child {
   margin-bottom: 0.75rem;
+  flex-grow: 1;
 }
 
 .view-link {
@@ -139,9 +160,10 @@ h2 {
   color: var(--accent);
   font-size: 0.9rem;
   font-weight: 600;
+  margin-top: auto;
 }
 
-/* Project detail pages */
+/* ---------- Project detail pages ---------- */
 
 .back-link {
   display: inline-block;
@@ -158,25 +180,41 @@ h2 {
   margin-bottom: 2rem;
 }
 
+/* Fixed-ratio tiles so mixed screenshots/diagrams/graphs line up evenly
+   instead of stacking at their natural (very different) sizes. */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
   margin: 1.5rem 0 2rem;
 }
 
+.gallery figure {
+  margin: 0;
+}
+
 .gallery img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 4 / 3;
   object-fit: contain;
-  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   display: block;
+  padding: 0.5rem;
+}
+
+.gallery figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
 }
 
 .photo-placeholder {
   aspect-ratio: 4 / 3;
   border: 1px dashed var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: #f2f2f2;
   color: var(--muted);
   display: flex;
@@ -206,6 +244,8 @@ h2 {
   font-size: 0.95rem;
 }
 
+/* ---------- Contact / footer ---------- */
+
 .contact p {
   margin: 0.5rem 0;
 }
@@ -217,12 +257,22 @@ footer {
   padding: 2rem 0;
 }
 
-@media (max-width: 480px) {
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
   .hero h1 {
     font-size: 2rem;
   }
 
+  section {
+    padding: 2.5rem 0;
+  }
+
   nav a {
     margin-left: 1rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
   }
 }
