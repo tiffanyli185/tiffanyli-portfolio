@@ -27,32 +27,53 @@
     <h1>Mixed-Signal Asynchronous Flash ADC</h1>
     <p class="project-meta">Cornell Custom Silicon Systems (C2S2) · Oct. 2025 – Present</p>
 
-    <!-- Swap these placeholders for real project photos, e.g. <img src="flash-adc-1.jpg" alt="..."> -->
     <div class="gallery">
-      <div class="photo-placeholder">Add a photo here<br>(e.g. layout screenshot)</div>
-      <div class="photo-placeholder">Add a photo here<br>(e.g. simulation results)</div>
+      <img src = "images/resistive_dac.png" alt="resistive_dac breadboard schematic"></div>
+      <div class="photo-placeholder">
+        <img src = "images/full-overview.png" alt="full overview"></div>
+      </div>
     </div>
 
     <h2>Overview</h2>
-    <ul>
-      <li>
-        Designed schematics and layouts for mixed-signal analog blocks in TSMC
-        180nm CMOS using Cadence Virtuoso, including comparators and an
-        asynchronous flash ADC for the BIRD chip.
-      </li>
-      <li>
-        Built and verified analog switch layouts; contributed to top-level chip
-        integration and pad ring formatting.
-      </li>
-      <li>
-        Validated circuit performance via Monte Carlo and PEX simulations to catch
-        yield and process-variation issues before tape-out.
-      </li>
-    </ul>
+    <p>
+        This demo was mainly a way to test the comparator on our Analog S25 tapeout, 
+        both to confirm it worked correctly in silicon and to see if it could be reused 
+        for other applications beyond its original design. We built it into a small R2R ladder 
+        ADC to exercise it against a real analog input and a digital controller: an FSM 
+        steps a code to the R2R DAC, the resulting reference voltage is compared against 
+        the input, and the comparator's result feeds back into the FSM to decide whether to 
+        keep stepping or latch a final answer. Getting that loop working end to end confirmed 
+        the comparator performed as expected and could support more than its original use case.
+      </p>
+     <h2>More details</h2>
+     <p>
+        A flash ADC compares the input against many parallel references at once, 
+        but needs one comparator per level and stays sensitive to mismatch. 
+        We borrowed the reference ladder idea but used it serially, mainly to exercise our 
+        single comparator repeatedly rather than build a competitive ADC. The ladder and comparator 
+        came from the same S25 tapeout as last year's SAR ADC, but our FSM just counts the ladder 
+        code up one step at a time and watches for the comparator to trip, instead of doing 
+        a binary search, so we skipped the SAR design's bootstrapped switching and break before 
+        make logic.
+        
+      </p>
 
-    <h2>More details</h2>
-    <!-- Write more about this project here — design decisions, challenges, results, what you'd do differently, etc. -->
-    <p class="detail-placeholder">More details coming soon.</p>
+    <p>
+      On the breadboard, a six resistor R2R ladder fed one comparator input, with a potentiometer 
+      as the analog input on the other. The comparator itself just outputs a single bit, vcomp, 
+      indicating which of its two inputs is higher, so it's essentially converting the analog 
+      difference between the ladder voltage and Vin into a digital signal the FSM can act on. 
+      The FSM steps through states 3'b000 to 3'b111, each one the code sent to the DAC. While vcomp 
+      reads 0 it increments each clock edge; once vcomp flips to 1, the ladder voltage has passed the 
+      input, so the FSM resets and the trip state latches into a result register.
+    </p>
+
+    <p>
+      We confirmed this in simulation, where r2r_out and result tracked vcomp as expected, 
+      and on the oscilloscope, where the DAC output showed the expected ramp and reset pattern 
+      at both high and low voltage scales. This confirmed the comparator worked reliably across 
+      repeated cycles, not just one test cases.
+    </p>
 
     <a class="back-link" href="../index.html#projects">← Back to projects</a>
   </section>
