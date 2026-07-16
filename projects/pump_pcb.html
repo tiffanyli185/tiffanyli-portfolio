@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
 <header>
   <div class="nav-inner">
     <a href="../index.html" class="logo">Tiffany Li</a>
@@ -19,64 +18,62 @@
     </nav>
   </div>
 </header>
-
 <main>
   <section class="project-detail">
     <a class="back-link" href="../index.html#projects">← Back to projects</a>
-
     <h1>Pump Control PCB</h1>
 
-    
     <div class="gallery">
-      <div class="photo-placeholder">
+      <figure>
         <img src="images/pump_pcb.png" alt="Dual H-Bridge Motor Driver PCB">
-      </div>
-      <div class="photo-placeholder">
-        <img src="images/pump_layout.png" alt="Layout">
-      </div>
-       <div class="photo-placeholder">
-        <img src="images/pump_layout_3d.png" alt="3D Visualization of Layout">
-      </div>
+        <figcaption>Assembled dual H-bridge motor driver PCB</figcaption>
+      </figure>
+      <figure>
+        <img src="images/pump_layout.png" alt="PCB copper layout for the pump driver board">
+        <figcaption>PCB layout</figcaption>
+      </figure>
+      <figure>
+        <img src="images/pump_layout_3d.png" alt="3D rendered visualization of the PCB layout">
+        <figcaption>3D layout visualization</figcaption>
+      </figure>
     </div>
 
     <h2>Testing</h2>
-     <div class="gallery">
-      <div class="photo-placeholder">
-        <img src="images/testing_pump.png" alt="PCB testing">
-      </div>
+    <div class="gallery">
+      <figure>
+        <img src="images/testing_pump.png" alt="Bench setup for testing the pump driver PCB with an actual micropump">
+        <figcaption>PCB testing with a micropump</figcaption>
+      </figure>
+    </div>
 
     <h2>Overview</h2>
     <p>
-        This project designs and validates a low-power, sub-$50 microfluidic control system for 
-        driving micropumps that push liquid across the microfluidic channel of a wearable patch 
-        biosensor for Parkinson's disease on KiCAD. Built around an ATmega328P microcontroller and a 
-        TI DRV8833 dual H-bridge driver on a single 2-layer PCB, it uses 8-bit PWM in an open-loop 
-        configuration to control pump speed and direction. Power draw stays at 0.1–0.2W, roughly an 
+        This project designs and validates a low-power, sub-$50 microfluidic control system for
+        driving micropumps that push liquid across the microfluidic channel of a wearable patch
+        biosensor for Parkinson's disease, designed in KiCad. Built around an ATmega328P microcontroller and a
+        TI DRV8833 dual H-bridge driver on a single 2-layer PCB, it uses 8-bit PWM in an open-loop
+        configuration to control pump speed and direction. Power draw stays at 0.1–0.2W, roughly an
         order of magnitude below typical Arduino + L298N setups, showing that low-cost, off-the-shelf
         hardware can meet the energy and size constraints of a continuous, wearable biosensing platform.
     </p>
 
     <h2>More details</h2>
-      <p>
-       The board integrates a USB-C/FT230XQ programming interface, the ATmega328P (16MHz), the DRV8833 H-bridge 
-       with fault reporting, 
-       and a header for direct pump connection, driving fluid through the patch's microfluidic 
-       channel to keep fresh sample flowing over the sensing electrode. A 3.3V rail drawn from the 
-       FT230XQ's onboard regulator, a low-RDS(on) driver, and tight decoupling near each IC keep power 
-       and switching noise low, while placing the H-bridge next to the motor connector and pouring continuous 
-       ground planes minimizes parasitic loops and EMI. We ran SPICE simulations to verify reduced power draw 
-       and leakage ahead of fabrication, then tested the board with an actual pump and confirmed clean 
+    <p>
+       The board integrates a USB-C/FT230XQ programming interface, the ATmega328P (16MHz), the DRV8833 H-bridge
+       with fault reporting, and a header for direct pump connection, driving fluid through the patch's microfluidic
+       channel to keep fresh sample flowing over the sensing electrode. A 3.3V rail drawn from the
+       FT230XQ's onboard regulator, a low-RDS(on) driver, and tight decoupling near each IC keep power
+       and switching noise low, while placing the H-bridge next to the motor connector and pouring continuous
+       ground planes minimizes parasitic loops and EMI. We ran SPICE simulations to verify reduced power draw
+       and leakage ahead of fabrication, then tested the board with an actual pump and confirmed clean
        bidirectional switching, with total power meeting the 0.1–0.2W target and BoM cost under $50.
-      </p>
-    
+    </p>
 
     <a class="back-link" href="../index.html#projects">← Back to projects</a>
   </section>
 </main>
-
 <footer>
   <p>&copy; 2026 Tiffany Li</p>
 </footer>
-
 </body>
 </html>
