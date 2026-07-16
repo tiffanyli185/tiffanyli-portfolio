@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
 <header>
   <div class="nav-inner">
     <a href="../index.html" class="logo">Tiffany Li</a>
@@ -19,36 +18,53 @@
     </nav>
   </div>
 </header>
-
 <main>
   <section class="project-detail">
     <a class="back-link" href="../index.html#projects">← Back to projects</a>
-
-    <!-- Update the meta line below with the actual course/lab and dates -->
     <h1>Temperature-Controlled Fan</h1>
-    <p class="project-meta">Embedded Systems Project</p>
 
-    <!-- Swap these placeholders for real project photos, e.g. <img src="temp-fan-1.jpg" alt="..."> -->
     <div class="gallery">
-      <div class="photo-placeholder">Add a photo here<br>(e.g. circuit setup)</div>
-      <div class="photo-placeholder">Add a photo here<br>(e.g. finished build)</div>
+      <div class="photo-placeholder">Add a photo here<br>(e.g. FRDM-KL46Z + motor driver + fan wiring)</div>
+      <div class="photo-placeholder">Add a photo here<br>(e.g. LCD showing live temperature)</div>
     </div>
 
     <h2>Overview</h2>
-    <!-- Add project bullets here — what it does, what you built, key results -->
-    <p class="detail-placeholder">Add a project overview here.</p>
+    <p>
+      This project turns the FRDM-KL46Z's own on-die temperature sensor into a closed-loop fan
+      controller: the board reads its chip temperature every 500ms and adjusts fan speed
+      accordingly, with the live reading always shown on the onboard LCD. Two control strategies
+      are switchable at runtime via SW1 — a four-state FSM with hysteresis for simple,
+      deterministic stepped control, and a PID controller for smooth continuous control based on
+      tachometer feedback. No external sensor is needed, since the sensing, control, and display
+      all run off hardware already on the board.
+    </p>
 
     <h2>More details</h2>
-    <!-- Write more about this project here — design decisions, challenges, results, what you'd do differently, etc. -->
-    <p class="detail-placeholder">More details coming soon.</p>
+    <p>
+      Temperature comes from ADC0 in 16-bit mode with 16-sample hardware averaging, converted to
+      °C via the KL46 reference manual's formula, and sampled on a fixed 500ms cycle driven by a
+      PIT hardware timer interrupt rather than a software delay. In FSM mode the fan steps
+      through OFF (0%), LOW (40%), MED (70%), and HIGH (100%) duty cycle, triggering upward at
+      26°C, 28°C, and 30°C, with each downward transition delayed by 1°C of hysteresis so the fan
+      doesn't chatter at a boundary. In PID mode, temperature is linearly mapped to a target RPM
+      (500 RPM at 26°C ramping to 1800 RPM at 31.5°C), a feedforward term converts that directly
+      to an estimated duty cycle, and a PID correction (KP=0.01, KI=0.002, KD=0, clamped to ±30%)
+      closes the loop using the actual RPM read from a tachometer.
+    </p>
+    <p>
+      The resulting PWM signal (TPM-generated, 50Hz, edge-aligned on PTC1) drives an external
+      motor driver module rather than the fan directly, since the board's GPIO can only source a
+      few mA — the driver handles the fan's full current draw off a separate 9V supply, sharing
+      ground with the board. The system was validated with 6 independent test modes, including
+      scripted temperature injection to confirm all 14 FSM transition/hysteresis boundaries
+      passed, and oscilloscope verification of the PWM waveform.
+    </p>
 
     <a class="back-link" href="../index.html#projects">← Back to projects</a>
   </section>
 </main>
-
 <footer>
   <p>&copy; 2026 Tiffany Li</p>
 </footer>
-
 </body>
 </html>
