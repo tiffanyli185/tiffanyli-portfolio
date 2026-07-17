@@ -33,6 +33,15 @@
     font-size: 0.9em;
     color: #666;
   }
+  .photo-row {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  .photo-row .photo-placeholder {
+    margin: 20px 0 !important;
+  }
 </style>
 </head>
 <body>
@@ -86,14 +95,16 @@
       active vector needs updating each frame, keeping playback smooth.
     </p>
     <h2>PCB & DAC Testing</h2>
-    <figure class="photo-placeholder">
-      <img src="images/awg520_DAC.png" alt="awg520_DAC">
-      <figcaption>Simulating a 8-Bit DAC on AWG520</figcaption>
-    </figure>
-    <figure class="photo-placeholder">
-      <img src="images/quasi_pcb.png" alt="quasi_pcb">
-      <figcaption>SSB 1GHz pre-processing PCB before LO mixing</figcaption>
-    </figure>
+    <div class="photo-row">
+      <figure class="photo-placeholder">
+        <img src="images/awg520_DAC.png" alt="awg520_DAC">
+        <figcaption>Simulating a 8-Bit DAC on AWG520</figcaption>
+      </figure>
+      <figure class="photo-placeholder">
+        <img src="images/quasi_pcb.png" alt="quasi_pcb">
+        <figcaption>SSB 1GHz pre-processing PCB before LO mixing</figcaption>
+      </figure>
+    </div>
     <p>
       Used an AWG520 to generate DAC output for Python-synthesized pulses and captured
       the waveforms on an oscilloscope to verify timing and shape. Designed a PCB for
