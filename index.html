@@ -5,6 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tiffany Li — Portfolio</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  .hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-text {
+    flex: 1 1 400px;
+    min-width: 0;
+  }
+  .hero-photo {
+    flex: 0 0 auto;
+    width: 180px;
+    height: 180px;
+  }
+  .hero-photo img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+</style>
 </head>
 <body>
 <header>
@@ -35,9 +59,8 @@
         "learn, unlearn, and relearn" - Alvin Toffler
       </p>
     </div>
-    <div class="hero-photo photo-placeholder">
-      <img src = "images/tiffany_photo.png" alt = "headshot">
-      <span class="photo-caption">This is me</span>
+    <div class="hero-photo">
+      <img src="images/tiffany_photo.png" alt="headshot">
     </div>
   </section>
   <section id="projects" class="projects">
