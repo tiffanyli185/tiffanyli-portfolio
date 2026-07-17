@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../style.css">
 <style>
   .photo-placeholder {
+    position: static !important;
     display: block !important;
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -19,25 +20,35 @@
     padding: 0 !important;
     background: none !important;
     border: none !important;
+    inset: auto !important;
+    float: none !important;
   }
   .photo-placeholder img {
+    position: static !important;
     display: block !important;
     width: 100% !important;
     max-width: 340px !important;
     height: auto !important;
     border-radius: 8px;
+    float: none !important;
+    inset: auto !important;
   }
   .photo-placeholder figcaption {
+    position: static !important;
     display: block !important;
     margin-top: 8px;
     font-size: 0.9em;
     color: #666;
+    float: none !important;
   }
   .photo-row {
+    position: static !important;
     display: flex !important;
     flex-wrap: wrap;
     gap: 32px;
     align-items: flex-start;
+    height: auto !important;
+    min-height: 0 !important;
   }
   .photo-row .photo-placeholder {
     margin: 20px 0 !important;
