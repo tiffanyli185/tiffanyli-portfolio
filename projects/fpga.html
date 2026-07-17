@@ -22,64 +22,47 @@
   <section class="project-detail">
     <a class="back-link" href="../index.html#projects">← Back to projects</a>
     <h1>TinyRV1 Processor & FPGA Door Monitor</h1>
-    <p class="project-meta">ECE 2300: Digital Logic and Computer Organization, Cornell University · DE0-CV FPGA</p>
-
-    <div class="gallery">
-      <div class="photo-placeholder">Add a photo here<br>(e.g. DE0-CV board wired to the door sensor and displays)</div>
-      <div class="photo-placeholder">Add a photo here<br>(e.g. oscilloscope hooked up during testing)</div>
-    </div>
-
+    <p class="project-meta">ECE 2300: Digital Logic and Computer Organization, Cornell University</p>
+   
     <h2>Overview</h2>
     <p>
-      This project is the final lab of ECE 2300, building a full TinyRV1 RISC-V computer system
-      on a DE0-CV FPGA: a single-cycle processor, a specialized accumulate accelerator, and an
-      embedded I/O system, all wired together and running real assembly programs, including a
-      door monitor, a two-function calculator, and an array-accumulate loop. It's the capstone of
-      a three-lab progression, each one building the hardware and design skills the next one
-      depended on.
+      The capstone lab of ECE 2300: a full TinyRV1 RISC-V computer on a DE0-CV FPGA, which is composed of a
+      single-cycle processor, a custom accumulate accelerator, and memory-mapped I/O, running real
+      programs including a door monitor and an array-accumulate loop. It was a built up of 
+      multiple labs throughout the semester that built up to this rather complex project for 
+      someone who have never tested with Verilog and the concepts of computer engineering before. 
+      <p>
+      A progression where each project built directly on the last: Lab 2 (a calculator) introduced
+      combinational logic: an ALU, muxes, control signals. Lab 3 (a music player) added
+      sequential logic, FSMs, and memory-mapped I/O. Lab 4 combined all of it into a full
+      instruction set, register file, and datapath wired to real FPGA peripherals. The throughline
+      was modularity: build small, verified pieces, then compose them into something larger,
+      simplifying each piece rather than reinventing it.
+      </p>
     </p>
-    <p>
-      Lab 2 built a two-function calculator, introducing combinational logic building blocks — an
-      ALU, muxes, and basic control signals — as a self-contained, single-purpose circuit. Lab 3
-      built a multi-note music player, adding sequential logic, finite-state machines, and
-      memory-mapped I/O to that foundation. Lab 4 combines all of it: the ALU and control logic
-      from Lab 2, the FSM and memory-mapped I/O patterns from Lab 3, and a full RISC-V
-      instruction set, register file, and datapath on top, wired to real FPGA peripherals
-      (seven-segment displays, a distance sensor, a multi-note player, and an SPI program loader).
-    </p>
-
     <h2>System Architecture</h2>
     <p>
-      The processor was built up part by part rather than all at once: the immediate generator,
-      ALU, register file, PC logic, and control signals were each implemented and checked
-      individually against the instruction control-signal table from lecture before being wired
-      into a single datapath and control unit. That datapath then connects to a memory bus, which
-      arbitrates between an SPI loader (for programs sent from a host workstation) and the
-      physical memory and external I/O devices the processor reads and writes through
-      memory-mapped addresses.
+      Each datapath component (immediate generator, ALU, register file, PC logic, control
+      signals) was built and verified individually against the instruction control-signal table
+      before being wired into one datapath and control unit. That datapath connects to a memory
+      bus arbitrating between an SPI loader (for programs sent from a host) and physical memory/I/O.
     </p>
     <div class="gallery">
       <figure>
         <img src="images/figure3_datapath.png" alt="Embedded system diagram and processor datapath diagram with annotated critical path delays">
-        <figcaption>Embedded system diagram (SPI, memory bus, processor, I/O) and processor datapath with critical-path timing</figcaption>
+        <figcaption>Embedded system diagram and processor datapath with critical-path timing</figcaption>
       </figure>
     </div>
     <p>
-      The highlighted critical path corresponds to a load-word instruction: from the control unit,
-      through the <code>op2_sel</code> signal, into the ALU adder, back through the memory bus,
-      into <code>dmem_rdata</code>, through the writeback mux, and into the register file. This
-      matches what's expected from lecture, since load word touches nearly every stage of the
-      datapath in one cycle.
+      The critical path traces a load-word instruction through nearly the entire datapath in one
+      cycle: control unit, ALU adder, memory bus, writeback mux, register file, matching lecture
+      expectations for the most demanding instruction.
     </p>
-
     <h3>Accumulate Accelerator</h3>
     <p>
-      Alongside the general-purpose processor, we designed a specialized accumulate accelerator
-      that sums an array of 32-bit values directly in hardware, without running any instructions.
-      Its datapath needs a counter to step through array indices, a multiplier to convert each
-      index into a byte address, a memory interface to fetch one element per cycle, and an adder
-      plus register to hold the running sum, with muxes selecting each of these based on the
-      current state.
+      A specialized accelerator sums an array of 32-bit values directly in hardware, no
+      instructions required: a counter steps through indices, a multiplier converts them to byte
+      addresses, and an adder/register hold the running sum.
     </p>
     <div class="gallery">
       <figure>
@@ -92,72 +75,50 @@
       </figure>
     </div>
     <p>
-      The three-state FSM (BEGIN, ACCUM, DONE) exists because the valid/ready handshake protocol
-      requires separate phases for accepting a new request, doing the accumulation work, and
-      holding the finished result — without them, the accelerator could reset mid-computation or
-      violate the rule that <code>in_rdy</code> can't depend on <code>in_val</code>. BEGIN latches
-      the array size and issues a single-cycle reset; ACCUM performs one memory read and one add
-      per cycle until the counter signals done; DONE holds the result stable and re-asserts
-      <code>in_rdy</code> until the next request arrives.
+      A three-state FSM (BEGIN, ACCUM, DONE) keeps the valid/ready handshake clean: BEGIN latches
+      the array size, ACCUM does one read+add per cycle, DONE holds the result until the next
+      request.
     </p>
-
-    <h2>Area & Timing Analysis</h2>
+    <h2>Area & Timing</h2>
     <p>
-      Quartus reported the processor uses 6,244 ALMs, 9,072 ALUTs, and 5,755 dedicated logic
-      registers — about 34% of the DE0-CV's fabric. That's a large jump from earlier labs: the
-      Lab 2 calculator used only a few hundred ALUTs, and the Lab 3 music player used roughly
-      300–500, so the processor is 20–30x larger than either. That's the direct cost of
-      generality — a full instruction set, 32-register file, branch/jump logic, and a shared
-      datapath capable of executing many different instructions, versus task-specific hardware
-      built for exactly one job.
+      The processor used <strong>6,244 ALMs / 9,072 ALUTs / 5,755 registers (~34% of the FPGA
+      fabric)</strong>, 20 to 30x larger than Lab 2 or Lab 3, the direct cost of generality (full
+      ISA, 32-register file, branch/jump logic) versus single-purpose hardware.
     </p>
     <div class="gallery">
       <figure>
         <img src="images/figure1_chip_planner.png" alt="FPGA chip planner view showing the processor's placement and area footprint">
-        <figcaption>Chip planner: processor placement and area footprint on the DE0-CV</figcaption>
+        <figcaption>Chip planner: processor placement and area footprint</figcaption>
       </figure>
       <figure>
         <img src="images/figure2_rtl_hierarchy.png" alt="RTL viewer showing the full design hierarchy and a gate-level full adder implementation">
-        <figcaption>RTL hierarchy (left) and gate-level full adder (right)</figcaption>
+        <figcaption>RTL hierarchy and gate-level full adder</figcaption>
       </figure>
     </div>
     <p>
-      On timing, the processor met its 80ns cycle constraint with a critical path of 63.280ns.
-      Using time/program = instructions/program × cycles/instruction × time/cycle, accumulating
-      31 elements takes 159 cycles (5 instructions per loop iteration × 31, plus 4 setup
-      instructions) at 1 cycle/instruction, for an expected execution time of 159 × 80ns =
-      12,720ns — which matched the 12.7µs period measured directly on the oscilloscope.
+      Timing closed at <strong>63.28ns</strong> against an 80ns constraint. Summing a 31-element
+      array takes 159 cycles at 1 cycle/instruction, predicting 159 × 80ns = <strong>12,720ns</strong>,
+      matching the 12.7µs measured on the oscilloscope.
     </p>
-
     <h2>Testing & Results</h2>
     <p>
-      Each stage was checked against hardware evidence rather than just simulation. The
-      accumulate assembly program below was the workload used throughout the area and timing
-      analysis: it initializes the loop counter, running total, and data pointer, then loads,
-      adds, and advances the pointer each iteration until the counter reaches zero.
+      Every stage was validated against hardware, not just simulation. 
     </p>
     <div class="gallery">
       <figure>
-        <img src="images/figure5_accumulate_asm.png" alt="Accumulate loop assembly code: addi initialization followed by lw, add, addi, addi, bne loop">
-        <figcaption>Accumulate loop assembly program</figcaption>
-      </figure>
-      <figure>
         <img src="images/figure4_spi_scope.png" alt="Oscilloscope trace of SPI SCLK and MOSI signals during program loading">
-        <figcaption>SPI program load — SCLK (blue) and MOSI (yellow)</figcaption>
+        <figcaption>SPI program load. SCLK (blue) and MOSI (yellow)</figcaption>
       </figure>
       <figure>
         <img src="images/figure6_execution_time_scope.png" alt="Oscilloscope trace showing a 12.7 microsecond execution period for the accumulate program">
-        <figcaption>Measured execution time: 12.7µs, matching the hand-calculated 12,720ns</figcaption>
+        <figcaption>Measured: 12.7µs, matching the hand calculation</figcaption>
       </figure>
     </div>
     <p>
-      The accelerator was cross-checked the same way: its interactive simulator produced 159
-      "stat" cycles (the cycles where <code>out3</code> is high, i.e. actual fetch-and-add work)
-      for a size-31 array — matching the processor's own 159-cycle count for the equivalent
-      software loop, with about 4 extra cycles from the final branch fall-through and cleanup
-      before the store.
+      The accelerator's simulator produced the same 159-cycle count for a size-31 array as the
+      processor's software loop (plus ~4 cycles for branch fall through/cleanup), confirming the
+      hardware and software paths matched.
     </p>
-
     <a class="back-link" href="../index.html#projects">← Back to projects</a>
   </section>
 </main>
