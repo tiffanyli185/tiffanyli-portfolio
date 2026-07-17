@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
 <header>
   <div class="nav-inner">
     <a href="../index.html" class="logo">Tiffany Li</a>
@@ -19,46 +18,68 @@
     </nav>
   </div>
 </header>
-
 <main>
   <section class="project-detail">
     <a class="back-link" href="../index.html#research">← Back to research</a>
-
     <h1>Cryo-CMOS QuASI Validation</h1>
-    <p class="project-meta">Integrated Quantum-Classical Micro-Systems Lab (IQC) · Research Assistant · Oct. 2025 – Present</p>
-
-    <!-- Swap these placeholders for real photos, e.g. <img src="quasi-1.jpg" alt="..."> -->
-    <div class="gallery">
-      <div class="photo-placeholder">Add a photo here<br>(e.g. test setup)</div>
-      <div class="photo-placeholder">Add a photo here<br>(e.g. QuASI vs. Cadence plot)</div>
-    </div>
+    <p class="project-status">Ongoing project</p>
 
     <h2>Overview</h2>
-    <ul>
-      <li>
-        Validating a custom cryo-CMOS chip by comparing QuASI simulations against
-        Cadence circuit simulations, narrowing gate error to within 0.0014% after
-        calibration; hardware validation against Cadence and AWG250 measurements
-        in progress.
-      </li>
-      <li>
-        Generating real test signals with an AWG and mixer to recreate qubit drive
-        pulses on hardware, comparing chip measurements against Cadence and QuASI
-        predictions.
-      </li>
-    </ul>
+    <p>
+      Comparing QuASI simulations against Cadence circuit simulations (TSMC process)
+      to validate a custom cryo-CMOS chip. Our lab previously reached gate error
+      within 0.0014% after calibration; now re-checking that against a broader set of
+      hardware and Cadence data. Generating real test signals with an AWG and mixer to
+      recreate qubit drive pulses on hardware, and comparing chip measurements against
+      Cadence and QuASI predictions.
+    </p>
+    <p>
+      Compared AWG520-generated hardware pulses against QuASI's simulated predictions
+      (with injected noise) to see how well simulation tracked real measurements.
+      Implemented smoothing plus high-pass/low-pass filtering to simulate SSB
+      modulation as an alternative to DRAG, and now use Cadence to simulate both
+      independently for a side-by-side comparison. Wrote Python tooling to sweep pulse
+      parameters, compare configurations, and process/plot results from CSV data. The
+      0.0014% figure is being re-verified; if it doesn't hold, next steps include
+      refining calibration, widening the noise sweep, and cross-checking SSB vs. DRAG
+      under matched conditions.
+    </p>
 
-    <h2>More details</h2>
-    <!-- Write more about this research here — methodology, challenges, results, what's next, etc. -->
-    <p class="detail-placeholder">More details coming soon.</p>
+    <h2>Animation & Visualization</h2>
+    <figure class="photo-placeholder">
+      <img src="images/quasi_animation.png" alt="quasi_animation">
+      <figcaption>Quasi Animation</figcaption>
+    </figure>
+    <p>
+      Built a Python visualization layer on QuASI that renders directly from the
+      accumulated ⟨X⟩⟨Y⟩⟨Z⟩ gate history: an interactive Bloch sphere with a live
+      slider and readout, a scrubbable player, a headless GIF export, a shareable
+      Plotly HTML export (rotatable/zoomable during playback), and a one-call
+      PowerPoint asset bundle. Ghost trails are drawn once at low opacity so only the
+      active vector needs updating each frame, keeping playback smooth.
+    </p>
+
+    <h2>PCB & DAC Testing</h2>
+    <figure class="photo-placeholder">
+      <img src="images/awg520_DAC.png" alt="quasi_animation">
+      <figcaption>Simulating a 8-Bit DAC on AWG520</figcaption>
+    </figure>
+    <figure class="photo-placeholder">
+      <img src="images/quasi_pcb.png" alt="quasi_animation">
+      <figcaption> SSB 1Ghz pre-processing PCB before LO mixing </figcaption>
+    </figure>
+    <p>
+      Used an AWG520 to generate DAC output for Python-synthesized pulses and captured
+      the waveforms on an oscilloscope to verify timing and shape. Designed a PCB for
+      the SSB filtering circuit (smoothing plus high-pass/low-pass stages) used to
+      compare SSB against DRAG on real hardware.
+    </p>
 
     <a class="back-link" href="../index.html#research">← Back to research</a>
   </section>
 </main>
-
 <footer>
   <p>&copy; 2026 Tiffany Li</p>
 </footer>
-
 </body>
 </html>
