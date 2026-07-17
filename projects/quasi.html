@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cryo-CMOS QuASI Validation — Tiffany Li</title>
 <link rel="stylesheet" href="../style.css">
+<style>
+  .photo-placeholder {
+    margin: 20px 0;
+  }
+  .photo-placeholder img {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 8px;
+  }
+  .photo-placeholder figcaption {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #666;
+  }
+</style>
 </head>
 <body>
 <header>
@@ -23,7 +40,6 @@
     <a class="back-link" href="../index.html#research">← Back to research</a>
     <h1>Cryo-CMOS QuASI Validation</h1>
     <p class="project-status">Ongoing project</p>
-
     <h2>Overview</h2>
     <p>
       Comparing QuASI simulations against Cadence circuit simulations (TSMC process)
@@ -44,7 +60,6 @@
       refining calibration, widening the noise sweep, and cross-checking SSB vs. DRAG
       under matched conditions.
     </p>
-
     <h2>Animation & Visualization</h2>
     <figure class="photo-placeholder">
       <img src="images/quasi_animation.png" alt="quasi_animation">
@@ -58,15 +73,14 @@
       PowerPoint asset bundle. Ghost trails are drawn once at low opacity so only the
       active vector needs updating each frame, keeping playback smooth.
     </p>
-
     <h2>PCB & DAC Testing</h2>
     <figure class="photo-placeholder">
-      <img src="images/awg520_DAC.png" alt="quasi_animation">
+      <img src="images/awg520_DAC.png" alt="awg520_DAC">
       <figcaption>Simulating a 8-Bit DAC on AWG520</figcaption>
     </figure>
     <figure class="photo-placeholder">
-      <img src="images/quasi_pcb.png" alt="quasi_animation">
-      <figcaption> SSB 1Ghz pre-processing PCB before LO mixing </figcaption>
+      <img src="images/quasi_pcb.png" alt="quasi_pcb">
+      <figcaption>SSB 1GHz pre-processing PCB before LO mixing</figcaption>
     </figure>
     <p>
       Used an AWG520 to generate DAC output for Python-synthesized pulses and captured
@@ -74,7 +88,6 @@
       the SSB filtering circuit (smoothing plus high-pass/low-pass stages) used to
       compare SSB against DRAG on real hardware.
     </p>
-
     <a class="back-link" href="../index.html#research">← Back to research</a>
   </section>
 </main>
